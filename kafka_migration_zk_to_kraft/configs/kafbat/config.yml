@@ -3,8 +3,87 @@ kafka:
     - name: cagri_cluster
       bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
 
+      # Schema Registry connection and authentication details
+      schemaRegistry: http://schema-registry:8085
+      schema-registry-auth:
+        username: schema registry username
+        password: schema registry password   
+
+      ksqldb-server: http://ksqldb-host:8088
+      ksqldb-server-auth:
+        username: ksqldb-username
+        password: ksqdb-passsword
+      
+
+      # Kafka Connect REST endpoint and optional authentication
+      kafka-connect:
+        - name: first  # Identifier for the Connect cluster
+          address: http://kafka-connect-host:8083
+          username: Auth username
+          password: Auth password
+
+      # Kafka Consumer configuration overrides
+      consumer-properties:
+        "max.partition.fetch.bytes": 1048576
+
+      # Kafka Producer configuration overrides
+      producer-properties:
+        "enable.idempotence": false
+
+      read-only: true  # Prevent write operations from the UI
+
+      polling-throttle-rate: 0  # Delay (seconds) between polling intervals in UI; 0 = no throttling 
+
+      audit:
+          topic-audit-enabled: false  # Enable/disable Kafka topic audit logs
+          console-audit-enabled: false  # Enable/disable console audit output
+          topic: audit-topic-name  # Kafka topic for audit entries
+          audit-topics-partitions: 3  # Number of partitions for the audit topic
+          level: ALL  # ALL = log all actions, ALTER_ONLY = only mutating actions
+          audit-topic-properties:
+            "retention.ms": 43200000  # Audit log retention in ms (12 hours)
+
+# Prefix to identify internal Kafka topics used by system tools
+internalTopicPrefix: "__"
+
+# Timeout for admin Kafka operations (in milliseconds)
+admin-client-timeout: 30000
+
+# Polling behavior for consumer previews in the UI
+polling:
+  poll-timeout-ms: 1000  # How long to wait for new records (ms)
+  max-page-size: 500  # Maximum number of records per poll
+  default-page-size: 100  # Default number of records per poll
+
+
+# ======================================================
+# WebClient Settings
+# Configuration for HTTP clients used by the app.
+# ======================================================
+webclient:
+  response-timeout-ms: 20000  # Timeout for all outgoing HTTP requests
+  max-in-memory-buffer-size: 20MB  # Maximum buffer size for handling responses
+
+# ======================================================
+# Spring Boot Actuator
+# Enables health, info, and Prometheus endpoints for monitoring.
+# ======================================================
+management:
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "info,health,prometheus"
+
+
+
 server:
   port: 8080
+
 
 # ======================================================
 # Application Logging Configuration

@@ -151,10 +151,10 @@ services:
   kafbat-ui:
     container_name: kafbat-ui
     build:
-      context: ./images/kafkbat/.
+      context: ./images/kafbat/.
       dockerfile: Dockerfile
     ports:
-      - "8090:8090"
+      - "8090:8080"
     volumes:
       - ./configs/kafbat/config.yml:/mnt/config.yml:ro
     networks:
