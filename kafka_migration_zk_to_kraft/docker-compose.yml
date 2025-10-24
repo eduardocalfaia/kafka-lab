@@ -27,6 +27,22 @@ services:
       dahbest:
         ipv4_address: 172.80.0.11
 
+    controller1:
+    container_name: controller1
+    build:
+      context: ./images/controller/.
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    ports:
+      - "19093:19093"
+    volumes:
+      - ./configs/controller/controller1/:/mnt/properties
+    command: /bin/bash
+    networks:
+      dahbest:
+        ipv4_address: 172.80.0.17
+
   kafka2:
     container_name: kafka2
     build:
@@ -42,6 +58,22 @@ services:
     networks:
       dahbest:
         ipv4_address: 172.80.0.12
+
+  controller2:
+    container_name: controller2
+    build:
+      context: ./images/controller/.
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    ports:
+      - "29093:29093"
+    volumes:
+      - ./configs/controller/controller2/:/mnt/properties
+    command: /bin/bash
+    networks:
+      dahbest:
+        ipv4_address: 172.80.0.18
 
   zookeeper2:
     container_name: zookeeper2
@@ -70,6 +102,22 @@ services:
     networks:
       dahbest:
         ipv4_address: 172.80.0.14
+
+  controller3:
+    container_name: controller3
+    build:
+      context: ./images/controller/.
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    ports:
+      - "39093:39093"
+    volumes:
+      - ./configs/controller/controller3/:/mnt/properties
+    command: /bin/bash
+    networks:
+      dahbest:
+        ipv4_address: 172.80.0.19
 
   zookeeper3:
     container_name: zookeeper3
