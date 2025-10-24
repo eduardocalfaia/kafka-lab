@@ -1,0 +1,18 @@
+kafka:
+  clusters:
+    - name: cagri_cluster
+      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+
+server:
+  port: 8080
+
+# ======================================================
+# Application Logging Configuration
+# Configure logging levels for specific packages.
+# ======================================================
+logging:
+  level:
+    root: INFO
+    io.kafbat.ui: DEBUG
+    reactor.netty.http.server.AccessLog: INFO
+    org.hibernate.validator: WARN
