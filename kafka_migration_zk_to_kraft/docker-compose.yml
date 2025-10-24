@@ -22,7 +22,7 @@ services:
       context: ./images/zookeeper/.
       dockerfile: Dockerfile
     volumes:
-      - ./configs/zookeeper/zoo.cfg:/mnt/apache-zookeeper-3.7.2-bin/conf/zoo.cfg
+      - ./configs/zookeeper/zoo.cfg:/mnt/apache-zookeeper-3.9.4-bin/conf/zoo.cfg
     networks:
       dahbest:
         ipv4_address: 172.80.0.11
@@ -82,7 +82,7 @@ services:
       context: ./images/zookeeper/.
       dockerfile: Dockerfile
     volumes:
-      - ./configs/zookeeper/zoo.cfg:/mnt/apache-zookeeper-3.7.2-bin/conf/zoo.cfg
+      - ./configs/zookeeper/zoo.cfg:/mnt/apache-zookeeper-3.9.4-bin/conf/zoo.cfg
     networks:
       dahbest:
         ipv4_address: 172.80.0.13
@@ -126,7 +126,7 @@ services:
       context: ./images/zookeeper/.
       dockerfile: Dockerfile 
     volumes:
-      - ./configs/zookeeper/zoo.cfg:/mnt/apache-zookeeper-3.7.2-bin/conf/zoo.cfg
+      - ./configs/zookeeper/zoo.cfg:/mnt/apache-zookeeper-3.9.4-bin/conf/zoo.cfg
     networks:
       dahbest:
         ipv4_address: 172.80.0.15
