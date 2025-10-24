@@ -18,9 +18,9 @@ RUN mkdir -p /mnt/all_logs/zookeeper_data
 
 WORKDIR /mnt
 
-RUN wget https://downloads.apache.org/zookeeper/zookeeper-3.7.2/apache-zookeeper-3.7.2-bin.tar.gz && \
-    tar -xzf apache-zookeeper-3.7.2-bin.tar.gz && \
-    rm apache-zookeeper-3.7.2-bin.tar.gz
+RUN wget https://downloads.apache.org/zookeeper/zookeeper-3.9.4/apache-zookeeper-3.9.4-bin.tar.gz && \
+    tar -xzf apache-zookeeper-3.9.4-bin.tar.gz && \
+    rm apache-zookeeper-3.9.4-bin.tar.gz
 
 COPY init-sh/zookeeper-starter.sh /usr/bin
 RUN chmod +x /usr/bin/zookeeper-starter.sh

@@ -19,9 +19,9 @@ RUN mkdir -p /mnt/all_logs/controller_data
 
 WORKDIR /mnt
 
-RUN wget https://downloads.apache.org/kafka/3.8.0/kafka_2.13-3.8.0.tgz && \
-    tar -xzf kafka_2.13-3.8.0.tgz && \
-    rm kafka_2.13-3.8.0.tgz
+RUN wget https://downloads.apache.org/kafka/3.9.1/kafka_2.13-3.9.1.tgz && \
+    tar -xzf kafka_2.13-3.9.1.tgz && \
+    rm kafka_2.13-3.9.1.tgz
 
 COPY init-sh/kafka-starter.sh /usr/bin
 RUN chmod +x /usr/bin/kafka-starter.sh

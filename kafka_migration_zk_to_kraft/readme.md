@@ -7,8 +7,8 @@ It’s important to be aware that migrating with PLAINTEXT differs from migratin
 
 ## Kafka and Zookeeper Versions:
 ```bash
-Kafka = 3.8.0
-Zookeeper = 3.7.2
+Kafka = 3.9.1
+Zookeeper = 3.9.4
 ```
 
 ### Explanation
@@ -31,21 +31,21 @@ In this section, we'll start 3 kafka broker.
 ```bash
 docker exec -it kafka1 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-1/server.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-1/server.properties
 ```
 
 ### Start Kafka For kafka2:
 ```bash
 docker exec -it kafka2 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-1/server.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-1/server.properties
 ```
 
 ### Start Kafka For kafka3:
 ```bash
 docker exec -it kafka3 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-1/server.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-1/server.properties
 ```
 
 ### Restart Kafka-ui Container:
@@ -80,7 +80,7 @@ In this section, follow the steps outlined in `/mnt/properties/step-1`, `/mnt/pr
 ```bash[]
 docker exec -it zookeeper1 bash
 
-apache-zookeeper-3.7.2-bin/bin/zkCli.sh -server zookeeper1:2181
+apache-zookeeper-3.9.4-bin/bin/zkCli.sh -server zookeeper1:2181
 ```
 
 > get /cluster/id
@@ -93,7 +93,7 @@ Example:
 ```bash
 docker exec -it kafka1 bash
 
-./kafka_2.13-3.8.0/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
+./kafka_2.13-3.9.1/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
 
 Example:
 Formatting /all_logs/kafka with metadata.version 3.8-IV0
@@ -103,7 +103,7 @@ Formatting /all_logs/kafka with metadata.version 3.8-IV0
 ```bash
 docker exec -it kafka2 bash
 
-./kafka_2.13-3.8.0/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
+./kafka_2.13-3.9.1/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
 
 Example:
 Formatting /all_logs/kafka with metadata.version 3.8-IV0
@@ -113,7 +113,7 @@ Formatting /all_logs/kafka with metadata.version 3.8-IV0
 ```bash
 docker exec -it kafka3 bash
 
-./kafka_2.13-3.8.0/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
+./kafka_2.13-3.9.1/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
 
 Example:
 Formatting /all_logs/kafka with metadata.version 3.8-IV0
@@ -133,21 +133,21 @@ We have already formatted the cluster ID for our new KRaft cluster.
 ```bash
 docker exec -it kafka1 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
 ```
 
 ### Start Kafka2 step-2 controller.properties file:
 ```bash
 docker exec -it kafka2 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
 ```
 
 ### Start Kafka3 step-2 controller.properties files for kakfa1:
 ```bash
 docker exec -it kafka3 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
 ```
 
 ![](screenshots/waiting-kafka-brokers.png)
@@ -161,7 +161,7 @@ When starting the controller, we need to migrate step by step by shutting down e
 
 docker exec -it kafka1 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/broker.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/broker.properties
 ```
 
 ### Start Kafka2 with step-2 broker.properties files:
@@ -170,7 +170,7 @@ kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/broker.propert
 
 docker exec -it kafka2 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/broker.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/broker.properties
 ```
 
 ### Start Kafka3 with step-2 broker.properties files:
@@ -179,7 +179,7 @@ kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/broker.propert
 
 docker exec -it kafka3 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-2/broker.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/broker.properties
 ```
 
 ## Check the logs to confirm that the migration is complete:
@@ -207,9 +207,9 @@ in this step you need to stop your kafka1, kafka2 and kafka3 broker and controll
 ```bash
 docker exec -it kafka1 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
 ```
 
 ### Start Kafka2 step-3 controller.properties and broker.properties files:
@@ -217,9 +217,9 @@ kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/broker.propert
 ```bash
 docker exec -it kafka2 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
 ```
 
 ### Start Kafka3 step-3 controller.properties and broker.properties files:
@@ -227,9 +227,9 @@ kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/broker.propert
 ```bash
 docker exec -it kafak3 bash
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
 
-kafka_2.13-3.8.0/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
 ```
 
 ## Fully KRaft:
