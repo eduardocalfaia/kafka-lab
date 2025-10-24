@@ -27,8 +27,8 @@ services:
       dahbest:
         ipv4_address: 172.80.0.11
 
-    controller1:
-    container_name: controller1
+  controller1:
+    container_name: controller_1
     build:
       context: ./images/controller/.
       dockerfile: Dockerfile
@@ -60,7 +60,7 @@ services:
         ipv4_address: 172.80.0.12
 
   controller2:
-    container_name: controller2
+    container_name: controller_2
     build:
       context: ./images/controller/.
       dockerfile: Dockerfile
@@ -104,7 +104,7 @@ services:
         ipv4_address: 172.80.0.14
 
   controller3:
-    container_name: controller3
+    container_name: controller_3
     build:
       context: ./images/controller/.
       dockerfile: Dockerfile
