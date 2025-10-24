@@ -147,6 +147,23 @@ services:
       - kafka1
       - kafka2
       - kafka3
+
+  kafbat-ui:
+    container_name: kafbat-ui
+    build:
+      context: ./images/kafkbat/.
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./configs/kafbat/config.yml:/mnt/config.yml:ro
+    networks:
+      dahbest:
+        ipv4_address: 172.80.0.20
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
       
 networks:
   dahbest: 
