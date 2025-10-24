@@ -13,7 +13,7 @@ Zookeeper = 3.9.4
 
 ### Explanation
 ```bash
-There are 3 Kafka brokers and 3 ZooKeepers. You don't need to change any *.properties files since I have set up step-1, step-2, and step-3, so each *.properties file has its own version. 
+There are 3 Kafka brokers, 3 ZooKeepers and 3 Controllers. You don't need to change any *.properties files since I have set up step-1, step-2, and step-3, so each *.properties file has its own version. 
 
 Because KRaft migration has 3 step: 
 1. Typly runnig kafka with zookeeper
@@ -26,6 +26,9 @@ In this section, we'll setup 3 ZooKeeper instances. All zookeeper automaticly st
 
 ## Start Kafka
 In this section, we'll start 3 kafka broker.
+
+## Start Kafka Controller
+In this section, we'll start 3 kafka controller.
 
 ### Start Kafka For kafka1:
 ```bash
@@ -89,9 +92,9 @@ Example:
 
 ![](screenshots/zookeeper-cluster-id.png)
 
-### Format the Logs folder the step-2 server.propertie for kafka1:
+### Format the Logs folder the step-2 controller.properties for controller1:
 ```bash
-docker exec -it kafka1 bash
+docker exec -it controller1 bash
 
 ./kafka_2.13-3.9.1/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
 
@@ -99,9 +102,9 @@ Example:
 Formatting /all_logs/kafka with metadata.version 3.8-IV0
 ```
 
-### Format the Logs folder the step-2 server.propertie for kafka2:
+### Format the Logs folder the step-2 controller.properties for controller2:
 ```bash
-docker exec -it kafka2 bash
+docker exec -it controller2 bash
 
 ./kafka_2.13-3.9.1/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
 
@@ -109,9 +112,9 @@ Example:
 Formatting /all_logs/kafka with metadata.version 3.8-IV0
 ```
 
-### Format the Logs folder the step-2 server.propertie for kafka3:
+### Format the Logs folder the step-2 controller.properties for controller3:
 ```bash
-docker exec -it kafka3 bash
+docker exec -it controller3 bash
 
 ./kafka_2.13-3.9.1/bin/kafka-storage.sh format --config /mnt/properties/step-2/controller.properties --cluster-id FerdygTKSceXXk4TAzVMyA
 
@@ -129,23 +132,23 @@ We have already formatted the cluster ID for our new KRaft cluster.
 ![](screenshots/controller-zk.png)
 
 [Check the DeepNotes[1]](#1)
-### Start Kafka1 step-2 controller.properties file:
+### Start Controller1 step-2 controller.properties file:
 ```bash
-docker exec -it kafka1 bash
+docker exec -it controller1 bash
 
 kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
 ```
 
-### Start Kafka2 step-2 controller.properties file:
+### Start Controller2 step-2 controller.properties file:
 ```bash
-docker exec -it kafka2 bash
+docker exec -it controller2 bash
 
 kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
 ```
 
-### Start Kafka3 step-2 controller.properties files for kakfa1:
+### Start Controller3 step-2 controller.properties files for kakfa1:
 ```bash
-docker exec -it kafka3 bash
+docker exec -it controller3 bash
 
 kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-2/controller.properties
 ```
@@ -203,31 +206,38 @@ In this step, you essentially need to restart all Kafka controllers and brokers.
 in this step you need to stop your kafka1, kafka2 and kafka3 broker and controller then restart with step-3 controller.propertie file. If you're using demon service, you need to basicly restart your broker. First, restart the controller, then the broker!
 ```
 
-### Start Kafka1 step-3 controller.properties and broker.properties files:
+### Start Controller1 and Kafka1 step-3 controller.properties and broker.properties files:
+`in this step you need to stop your controller1 and kafka1 then restart with step-3 controller.properties and broker.properties files.`
 ```bash
+docker exec -it controller1 bash
+
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
+
 docker exec -it kafka1 bash
 
-kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
-
 kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
 ```
 
-### Start Kafka2 step-3 controller.properties and broker.properties files:
-`in this step you need to stop your kafka2 controller then restart with step-3 controller.propertie file.`
+#### Start Controller2 and Kafka2 step-3 controller.properties and broker.properties files:
+`in this step you need to stop your controller2 and kafka2 then restart with step-3 controller.properties and broker.properties files.`
 ```bash
+docker exec -it controller2 bash
+
+kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
+
 docker exec -it kafka2 bash
 
-kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
-
 kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
 ```
 
-### Start Kafka3 step-3 controller.properties and broker.properties files:
-`in this step you need to stop your kafka3 controller then restart with step-3 controller.propertie file.`
+#### Start Controller3 and Kafka3 step-3 controller.properties and broker.properties files:
+`in this step you need to stop your controller3 and kafka3 then restart with step-3 controller.properties and broker.properties files.`
 ```bash
-docker exec -it kafak3 bash
+docker exec -it controller3 bash
 
 kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/controller.properties
+
+docker exec -it kafka3 bash
 
 kafka_2.13-3.9.1/bin/kafka-server-start.sh /mnt/properties/step-3/broker.properties
 ```
